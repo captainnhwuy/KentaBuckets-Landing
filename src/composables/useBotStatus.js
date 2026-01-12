@@ -8,9 +8,11 @@ const loading = ref(true)
 // Or just let it refetch if components mount separately?
 // Let's simple fetch on use or init.
 
+const API_URL = import.meta.env.VITE_BOT_API_URL || 'http://localhost:3000'
+
 const fetchStatus = async () => {
     try {
-        const res = await fetch('http://localhost:3000/api/public/status')
+        const res = await fetch(`${API_URL}/api/public/status`)
         if (res.ok) {
             const data = await res.json()
             isOnline.value = data.online
@@ -24,7 +26,7 @@ const fetchStatus = async () => {
 
 const fetchStats = async () => {
     try {
-        const res = await fetch('http://localhost:3000/api/public/whitelabel-count')
+        const res = await fetch(`${API_URL}/api/public/whitelabel-count`)
         if (res.ok) {
             const data = await res.json()
             customerCount.value = data.count
